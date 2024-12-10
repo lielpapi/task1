@@ -1,29 +1,31 @@
 const dotenv = require("dotenv").config();
 const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
-
 const express = require("express");
-const app = express();
+const bodyParser = require("body-parser");
 const postsRoute = require("./routes/post_route");
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+const commentRoutes = require("./routes/comment_route");
+
+const app = express();
+
+app.use(express.json()); 
+app.use(express.urlencoded({ extended: true })); 
+
 app.use("/posts", postsRoute);
+app.use("/comments", commentRoutes);
+
+
+const uri = process.env.DB_CONNECT || "mongodb://localhost:27017/mydb"; 
+
+
+if (mongoose.connection.readyState === 0) {
+  mongoose.connect(uri)
+    .then(() => console.log("Connected to database"))
+    .catch(err => console.log("Database connection error:", err));
+}
 
 const db = mongoose.connection;
-db.on("error", (error) => console.error(error));
-db.once("open", () => console.log("Connected to database"));
+db.on("error", (error) => console.error("MongoDB connection error:", error));
+db.once("open", () => console.log("MongoDB connected"));
 
-const initApp = () => {
-  return new Promise((resolve, reject) => {
-    mongoose
-      .connect(process.env.DB_CONNECT)
-      .then(() => {
-        resolve(app);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
-};
+module.exports = app; 
 
-module.exports = initApp;

@@ -38,3 +38,41 @@ Content-Type: application/json
     "title": "Updated Title",
     "content": "This is the updated content of the post."
 }
+
+
+### 
+POST /comments
+Content-Type: application/json
+Body:
+{
+  "postId": "ObjectId",
+  "author": "string",
+  "content": "string"
+}
+
+### 
+GET /comments/post/{postId}
+Response:
+[
+  {
+    "postId": "ObjectId",
+    "author": "string",
+    "content": "string",
+    "createdAt": "timestamp"
+  }
+]
+
+### 
+PUT /comments/{id}
+Content-Type: application/json
+Body:
+{
+  "content": "updated content"
+}
+
+### 
+DELETE /comments/{id}
+Response:
+{
+  "message": "Comment deleted successfully"
+}
