@@ -8,7 +8,7 @@ GET http://localhost:3000/posts?owner=taliel
 
 ###
 
-GET http://localhost:3000/posts/6762cf989b43b1f08f26c2c6
+GET http://localhost:3000/posts/67614a788727ad32b5f8d46e
  
 ###
 
@@ -27,7 +27,8 @@ GET http://localhost:3000/posts?sender=taliel
 
 ###
 
-PUT http://localhost:3000/posts/6762cf989b43b1f08f26c2c6
+PUT http://localhost:3000/posts/67614a788727ad32b5f8d46e
+
 Content-Type: application/json
 
 {
@@ -39,23 +40,23 @@ Content-Type: application/json
 ### 
 
 POST http://localhost:3000/comments
-
 Content-Type: application/json
+
 {
-  "postId": "6762cf989b43b1f08f26c2c6",
-  "author": "taliel",
-  "content": "This is a comment"
+  "postId": "67614a788727ad32b5f8d46e",
+  "owner": "taliel",
+  "comment": "This is a comment"
 }
 
 ### 
-GET http://localhost:3000/comments
+GET http://localhost:3000/comments/6762cf989b43b1f08f26c2c6
 
 Response:
 [
   {
     "postId": "6762cf989b43b1f08f26c2c6",
     "owner": "taliel",
-    "content": "string",
+    "comment": "string",
   }
 ]
 
