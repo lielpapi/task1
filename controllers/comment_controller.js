@@ -1,10 +1,12 @@
 const CommentModel = require("../models/comment_model");
+const mongoose = require('mongoose');
+
 
 const createComment = async (req, res) => {
   try {
     const comment = new CommentModel({
       postId: req.body.postId,
-      author: req.body.author,
+      owner: req.body.author,
       content: req.body.content
     });
     await comment.save();

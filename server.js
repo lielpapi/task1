@@ -9,12 +9,11 @@ const app = express();
 
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true })); 
-
 app.use("/posts", postsRoute);
 app.use("/comments", commentRoutes);
 
 
-const uri = process.env.DB_CONNECT || "mongodb://localhost:27017/mydb"; 
+const uri = process.env.DB_CONNECT || "mongodb://localhost:27017/task1"; 
 
 
 if (mongoose.connection.readyState === 0) {
