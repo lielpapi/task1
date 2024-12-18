@@ -1,10 +1,12 @@
 const PostModel = require("../models/post_model");
+const mongoose = require('mongoose');
+
 
 const getAllPosts = async (req, res) => {
-  const filter = req.query.owner;
+  const ownerFilter = req.query.owner;
   try {
-    if (filter) {
-      const posts = await PostModel.find({ owner: filter });
+    if (ownerFilter) {
+      const posts = await PostModel.find({ owner: ownerFilter });
       res.send(posts);
     } else {
       const posts = await PostModel.find();
@@ -41,18 +43,23 @@ const createPost = async (req, res) => {
 };
 
 const getPostsBySender = async (req, res) => {
-  const sender = req.query.sender;
+  const senderFilter = req.query.sender;  // מסנן לפי שולח הפוסט
   try {
-    const posts = await PostModel.find({ sender: sender });
-    res.send(posts);
+    if (senderFilter) {
+      // אם קיים מסנן שולח, מחזירים פוסטים עם שולח מסוים
+      const posts = await PostModel.find({ sender: senderFilter });
+      res.send(posts);
+    } else {
+      res.status(400).send("Sender query parameter is required");  // אם אין מסנן שולח, מחזירים שגיאה
+    }
   } catch (error) {
-    res.status(400).send(error.message);
+    res.status(400).send(error.message);  // מחזירים שגיאה במקרה של בעיה בביצוע
   }
 };
   
 const updatePost = async (req, res) => {
   try {
-    const post = await postModel.findByIdAndUpdate(
+    const post = await PostModel.findByIdAndUpdate(
       req.params.id, 
       req.body,      
       { new: true }  

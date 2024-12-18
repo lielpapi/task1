@@ -6,11 +6,11 @@ router.get("/", PostsController.getAllPosts);
 
 router.post("/",PostsController.createPost);
 
-router.get("/post/:postid", PostsController.getPostById);
+router.get("/:id", PostsController.getPostById);
 
 router.put("/:id", PostsController.updatePost);
 
-router.get("/sender", PostsController.getPostsBySender);
+router.get("/:sender", PostsController.getPostsBySender);
 
 
 module.exports = router;
