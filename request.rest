@@ -8,8 +8,8 @@ GET http://localhost:3000/posts?owner=taliel
 
 ###
 
-GET http://localhost:3000/posts/6734b0c818a1cf8344804554
-
+GET http://localhost:3000/posts/6762cf989b43b1f08f26c2c6
+ 
 ###
 
 POST http://localhost:3000/posts
@@ -27,7 +27,7 @@ GET http://localhost:3000/posts?sender=taliel
 
 ###
 
-PUT http://localhost:3000/posts/6734b0c818a1cf8344804554
+PUT http://localhost:3000/posts/6762cf989b43b1f08f26c2c6
 Content-Type: application/json
 
 {
@@ -37,21 +37,21 @@ Content-Type: application/json
 
 
 ### 
-POST /comments
-Content-Type: application/json
-Body:
+POST http://localhost:3000/comments
+Content-Type:application/json
+body:
 {
-  "postId": "ObjectId",
-  "author": "string",
-  "content": "string"
+  "postId": "6762cf989b43b1f08f26c2c6",
+  "owner": "taliel",
+  "content": "This is a comment"
 }
 
 ### 
-GET /comments/post/{postId}
+GET /comments/post/{6762cf989b43b1f08f26c2c6}
 Response:
 [
   {
-    "postId": "ObjectId",
+    "postId": "6762cf989b43b1f08f26c2c6",
     "author": "string",
     "content": "string",
     "createdAt": "timestamp"
@@ -59,7 +59,7 @@ Response:
 ]
 
 ### 
-PUT /comments/{id}
+PUT /comments/{6762cf989b43b1f08f26c2c6}
 Content-Type: application/json
 Body:
 {
@@ -67,7 +67,7 @@ Body:
 }
 
 ### 
-DELETE /comments/{id}
+DELETE /comments/{6762cf989b43b1f08f26c2c6}
 Response:
 {
   "message": "Comment deleted successfully"
