@@ -4,10 +4,11 @@ const mongoose = require('mongoose');
 
 const createComment = async (req, res) => {
   try {
+    console.log("Request Body:", req.body); // Log the request body
     const comment = new CommentModel({
       postId: req.body.postId,
-      owner: req.body.author,
-      content: req.body.content
+      owner: req.body.owner, // Changed from req.body.author to req.body.owner
+      comment: req.body.comment // Changed from req.body.content to req.body.comment
     });
     await comment.save();
     res.status(201).send(comment);
